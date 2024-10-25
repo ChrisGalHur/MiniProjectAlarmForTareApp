@@ -63,8 +63,16 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
             if (!pm.isIgnoringBatteryOptimizations(getPackageName())) {
-                Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
-                startActivity(intent);
+                new AlertDialog.Builder(this)
+                        .setTitle("Optimización de Batería")
+                        .setMessage("Para asegurar el correcto funcionamiento de la aplicación, es necesario excluirla de las optimizaciones de batería. ¿Deseas continuar?")
+                        .setPositiveButton("Sí", (dialog, which) -> {
+                            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS); //Lleva directamente al usuario a aceptar el permiso
+                            intent.setData(Uri.parse("package:" + getPackageName())); //
+                            startActivity(intent);
+                        })
+                        .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                        .show();
             }
         }
 
