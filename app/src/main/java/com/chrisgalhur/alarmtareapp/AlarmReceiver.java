@@ -1,52 +1,42 @@
 package com.chrisgalhur.alarmtareapp;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.PowerManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.core.app.NotificationCompat;
+import com.chrisgalhur.alarmtareapp.Activity.AlarmActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    //Channel ID
-    private static final String CHANNEL_ID = "alarm_channel";
     private static final String TAG = "AlarmReceiver";
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        createNotificationChannel(context);
+        // Obtener el PowerManager y adquirir un WakeLock
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "AlarmApp:WakeLock");
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.drawable.ic_alarm)
-                .setContentTitle("Alarma")
-                .setContentText("Alarma disparada")
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setAutoCancel(true);
+        // Adquirir el WakeLock durante un tiempo limitado
+        wakeLock.acquire(10 * 60 * 1000L /*10 minutos*/);
 
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(0, builder.build());
+        // Iniciar AlarmActivity
+        Intent alarmIntent = new Intent(context, AlarmActivity.class);
+        alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(alarmIntent);
 
-        Log.d(TAG, "Alarma disparada");
+        // Liberar el WakeLock
+        wakeLock.release();
     }
 
-    private void createNotificationChannel(Context context) {
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Alarm Channel";
-            String description = "Channel for Alarm notifications";
-            int importance = NotificationManager.IMPORTANCE_HIGH;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-
-            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        } else {
-            Toast.makeText(context, "No se puede crear el canal de notificación", Toast.LENGTH_SHORT).show();
-        }
+    private PendingIntent getDismissIntent(Context context) {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.setAction("DISMISS");
+        int flags = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ? PendingIntent.FLAG_IMMUTABLE : 0;
+        return PendingIntent.getBroadcast(context, 0, intent, flags);
     }
 }

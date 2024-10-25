@@ -18,7 +18,6 @@ public class AlarmHelper {
     public static void setAlarm(Context context, int hour, int minute) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
-
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
@@ -26,22 +25,22 @@ public class AlarmHelper {
         calendar.set(Calendar.MINUTE, minute);
         calendar.set(Calendar.SECOND, 0);
 
-        try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
-                Intent settingsIntent = new Intent(Settings.ACTION_REQUEST_SCHEDULE_EXACT_ALARM);
-                context.startActivity(settingsIntent);
-                Log.d(TAG, "Solicitar permiso para programar alarmas exactas");
-            } else {
-                alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-
-                Log.d(TAG, "Alarma programada");
+        if (alarmManager != null) {
+            try {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !alarmManager.canScheduleExactAlarms()) {
+                    Toast.makeText(context, "No se pueden programar alarmas exactas", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                } else {
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+                }
+                Log.d("AlarmHelper", "Alarma programada para " + hour + ":" + minute);
+            } catch (SecurityException e) {
+                Log.e("AlarmHelper", "No se pudo programar la alarma exacta", e);
+                Toast.makeText(context, "No se pudo programar la alarma exacta", Toast.LENGTH_SHORT).show();
             }
-        } catch (SecurityException e) {
-            e.printStackTrace();
-            Log.e(TAG, "Error al programar la alarma" + e.getMessage());
-            // Manejar la excepción de seguridad aquí
         }
-
-        Toast.makeText(context, "Alarma programada", Toast.LENGTH_SHORT).show();
     }
 }

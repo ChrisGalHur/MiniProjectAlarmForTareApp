@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
             android:allowBackup="true"
@@ -19,7 +18,7 @@
             android:theme="@style/Theme.AlarmTareapp"
             tools:targetApi="31">
         <activity
-                android:name=".MainActivity"
+                android:name=".Activity.MainActivity"
                 android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +27,19 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmReceiver" android:exported="false"/>
+        <activity
+                android:name=".Activity.AlarmActivity"
+                android:theme="@style/Theme.AlarmTareapp"
+                android:screenOrientation="portrait"
+                android:showWhenLocked="true"
+                android:turnScreenOn="true"
+                android:exported="true">
+        </activity>
+
+        <receiver
+                android:name=".AlarmReceiver"
+                android:exported="true"
+                android:enabled="true"/>
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".Activity.MainActivity">
 
     <TextView
             android:layout_width="wrap_content"
@@ -21,25 +21,25 @@
             android:layout_width="110dp"
             android:layout_height="58dp"
             android:inputType="text"
-            android:text="Hora"
             android:ems="10"
             android:id="@+id/etHoraMain"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="@+id/textView"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="50dp"
+            android:hint="Hora" />
 
     <EditText
             android:layout_width="110dp"
             android:layout_height="58dp"
             android:inputType="text"
-            android:text="Minutos"
             android:ems="10"
             android:id="@+id/etMinMain"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/etHoraMain"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:hint="Minutos" />
 
     <Button
             android:text="Ejecuta"
