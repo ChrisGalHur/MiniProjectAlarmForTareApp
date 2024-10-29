@@ -31,7 +31,6 @@
         <activity
                 android:name=".Activity.AlarmActivity"
                 android:theme="@style/Theme.AlarmTareapp"
-                android:screenOrientation="portrait"
                 android:showWhenLocked="true"
                 android:turnScreenOn="true"
                 android:exported="true">

@@ -9,6 +9,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.chrisgalhur.alarmtareapp.Activity.AlarmActivity;
+
 import java.util.Calendar;
 
 public class AlarmHelper {
@@ -17,8 +19,8 @@ public class AlarmHelper {
 
     public static void setAlarm(Context context, int hour, int minute) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        Intent intent = new Intent(context, AlarmActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, hour);
@@ -36,9 +38,9 @@ public class AlarmHelper {
                 } else {
                     alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                 }
-                Log.d("AlarmHelper", "Alarma programada para " + hour + ":" + minute);
+                Log.d(TAG, "Alarma programada para " + hour + ":" + minute);
             } catch (SecurityException e) {
-                Log.e("AlarmHelper", "No se pudo programar la alarma exacta", e);
+                Log.e(TAG, "No se pudo programar la alarma exacta", e);
                 Toast.makeText(context, "No se pudo programar la alarma exacta", Toast.LENGTH_SHORT).show();
             }
         }
