@@ -33,13 +33,18 @@
                 android:theme="@style/Theme.AlarmTareapp"
                 android:showWhenLocked="true"
                 android:turnScreenOn="true"
-                android:exported="true">
+                android:exported="true"
+                android:screenOrientation="portrait">
         </activity>
 
         <receiver
                 android:name=".AlarmReceiver"
                 android:exported="true"
                 android:enabled="true"/>
+
+        <receiver
+                android:name=".DismissIntent"
+                android:exported="true" />
     </application>
 
 </manifest>

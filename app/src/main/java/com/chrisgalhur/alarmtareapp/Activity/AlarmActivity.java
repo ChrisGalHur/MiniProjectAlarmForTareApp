@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.chrisgalhur.alarmtareapp.AlarmReceiver;
 import com.chrisgalhur.alarmtareapp.R;
 
 
@@ -21,6 +22,9 @@ public class AlarmActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.star_wars); // Usa un archivo mp3 o wav en res/raw
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
+
+        // Liberar el WakeLock cuando se inicia la actividad por completo
+        AlarmReceiver.releaseWakeLock();
 
         // Configurar botón para detener la alarma
         Button stopAlarmButton = findViewById(R.id.btnStopAlarm);
