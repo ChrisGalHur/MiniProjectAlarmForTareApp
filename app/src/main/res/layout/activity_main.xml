@@ -5,50 +5,236 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".Activity.MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintGuide_percent="0.05"
+            android:id="@+id/guideline" />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hello!"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="50dp"
-            android:id="@+id/textView" />
+            android:id="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/etHoraMain"
+            app:layout_constraintEnd_toEndOf="@+id/etHoraMain" />
 
     <EditText
             android:layout_width="110dp"
             android:layout_height="58dp"
             android:inputType="text"
-            android:text="Hora"
             android:ems="10"
             android:id="@+id/etHoraMain"
+            android:hint="Hora"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/textView"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
-            android:layout_marginTop="50dp" />
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toStartOf="@+id/guideline2" />
 
     <EditText
             android:layout_width="110dp"
             android:layout_height="58dp"
             android:inputType="text"
-            android:text="Minutos"
             android:ems="10"
             android:id="@+id/etMinMain"
-            app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/etHoraMain"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:hint="Minutos"
+            app:layout_constraintEnd_toEndOf="@+id/etHoraMain"
+            app:layout_constraintStart_toStartOf="@+id/etHoraMain" />
 
     <Button
             android:text="Ejecuta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/btExecuteMain"
             app:layout_constraintTop_toBottomOf="@+id/etMinMain"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/etMinMain"
+            app:layout_constraintStart_toStartOf="@+id/etMinMain" />
+
+    <TextView
+            android:text="PERMISSIONS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitlePermissionsMain"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            android:textStyle="bold" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline2"
+            app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline3"
+            app:layout_constraintGuide_percent="0.725" />
+
+    <TextView
+            android:text="SCHEDULE_EXACT_ALARM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitleScheduleAlarmPermissionMain"
+            app:layout_constraintTop_toTopOf="@+id/etHoraMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:textSize="10sp"
+            android:layout_marginStart="10dp" />
+
+    <TextView
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvScheduleAlarmPermissionMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleScheduleAlarmPermissionMain"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/view"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#090808"
+            app:layout_constraintTop_toBottomOf="@+id/tvScheduleAlarmPermissionMain"
+            android:layout_marginTop="10dp" />
+
+    <TextView
+            android:text="REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitleRequestIgnoreBatteryOptimizationsMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            android:layout_marginTop="10dp"
+            android:textSize="10sp"
+            android:layout_marginStart="10dp" />
+
+    <TextView
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvRequestIgnoreBatteryOptimizationsMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleRequestIgnoreBatteryOptimizationsMain"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/view2"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#090808"
+            app:layout_constraintTop_toBottomOf="@+id/tvRequestIgnoreBatteryOptimizationsMain"
+            android:layout_marginTop="10dp" />
+
+    <TextView
+            android:text="POST_NOTIFICATIONS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitlePostNotificationsMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <TextView
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvPostNotificationsMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitlePostNotificationsMain"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/view3"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#090808"
+            app:layout_constraintTop_toBottomOf="@+id/tvPostNotificationsMain"
+            android:layout_marginTop="10dp" />
+
+    <TextView
+            android:text="WAKE_LOCK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitleWakeLockMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/view3"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <TextView
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvWakeLockMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleWakeLockMain"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/view4"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#090808"
+            app:layout_constraintTop_toBottomOf="@+id/tvWakeLockMain"
+            android:layout_marginTop="10dp" />
+
+    <TextView
+            android:text="VIBRATE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTitleVibrateMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            android:textSize="10sp"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <TextView
+            android:text="No"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvVibrateMain"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitleVibrateMain"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp" />
+
+    <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:id="@+id/view5"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="#090808"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/tvVibrateMain"
+            android:layout_marginTop="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
