@@ -1,21 +1,12 @@
 package com.chrisgalhur.alarmtareapp;
 
-import static com.chrisgalhur.alarmtareapp.NotificationUtil.createNotificationChannel;
-
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.util.Log;
-
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-
-import com.chrisgalhur.alarmtareapp.Activity.AlarmActivity;
 
 public class AlarmReceiver extends BroadcastReceiver {
     // BroadcastReceiver permite a la aplicación responder a eventos del sistema, como alarmas programadas, notificaciones, etc.

@@ -31,7 +31,6 @@ public class NotificationUtil {
         int importance = NotificationManager.IMPORTANCE_HIGH;
         NotificationChannel channel = new NotificationChannel(channelId, channelName, importance);
         channel.setDescription(channelDescription);
-
         channel.setSound(soundUri, new AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_ALARM)
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
